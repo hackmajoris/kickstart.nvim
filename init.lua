@@ -642,6 +642,7 @@ do
       --  For example, in C this would take you to the header.
       map('grD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
+      map('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
       -- The following two autocommands are used to highlight references of the
       -- word under your cursor when your cursor rests there for a little while.
       --    See `:help CursorHold` for information about when this is executed
@@ -879,10 +880,9 @@ do
     -- See `:help blink-cmp-config-fuzzy` for more information
     fuzzy = { implementation = 'lua' },
 
-      -- Shows a signature help window while you type arguments for a function
-      signature = { enabled = true },
-    },
-  },
+    -- Shows a signature help window while you type arguments for a function
+    signature = { enabled = true },
+  }
 
   -- { -- You can easily change to a different colorscheme.
   -- Change the name of the colorscheme plugin below, and then
@@ -906,40 +906,25 @@ do
   --    end,
   --  },
 
-  {
-    'catppuccin/nvim',
-    name = 'catppuccin',
-    priority = 1000,
-    config = function()
-      require('catppuccin').setup {
-        no_italic = true,
-        flavour = 'mocha', -- latte, frappe, macchiato, mocha
-      }
-      vim.cmd.colorscheme 'catppuccin'
-    end,
-  },
+  vim.pack.add { gh 'catppuccin/nvim' }
+  require('catppuccin').setup {
+    no_italic = true,
+    flavour = 'mocha', -- latte, frappe, macchiato, mocha
+  }
+  vim.cmd.colorscheme 'catppuccin'
 
   -- Highlight todo, notes, etc in comments
-  {
-    'folke/todo-comments.nvim',
-    event = 'VimEnter',
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    ---@module 'todo-comments'
-    ---@type TodoOptions
-    ---@diagnostic disable-next-line: missing-fields
-    opts = { signs = false },
-  },
+  vim.pack.add { gh 'folke/todo-comments.nvim', gh 'nvim-lua/plenary.nvim' }
+  ---@diagnostic disable-next-line: missing-fields
+  require('todo-comments').setup { signs = false }
 
-  { -- Collection of various small independent plugins/modules
-    'nvim-mini/mini.nvim',
-    config = function()
-      -- Better Around/Inside textobjects
-      --
-      -- Examples:
-      --  - va)  - [V]isually select [A]round [)]paren
-      --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
-      --  - ci'  - [C]hange [I]nside [']quote
-      require('mini.ai').setup { n_lines = 500 }
+  -- Better Around/Inside textobjects
+  --  - va)  - [V]isually select [A]round [)]paren
+  --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
+  --  - ci'  - [C]hange [I]nside [']quote
+  vim.pack.add { gh 'nvim-mini/mini.nvim' }
+  require('mini.ai').setup { n_lines = 500 }
+end
 
 -- ============================================================
 -- SECTION 8: TREESITTER

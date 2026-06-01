@@ -3,6 +3,7 @@ test.sh
 .luarc.json
 nvim
 
+.idea
 spell/
 
 # In your personal fork, you likely want to comment this, since it's recommended to track
