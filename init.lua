@@ -1033,3 +1033,16 @@ vim.api.nvim_create_autocmd({"InsertLeave", "TextChanged"}, {
     end
   end,
 })
+
+-- :Claude — open Claude Code in a vertical split on the right
+vim.api.nvim_create_user_command('Claude', function()
+  vim.cmd('botright vsplit')                                  -- new split on the far right
+  vim.cmd('vertical resize ' .. math.floor(vim.o.columns * 0.4)) -- ~40% width
+  vim.cmd('terminal claude')                                  -- run the claude CLI
+  vim.cmd('startinsert')                                      -- drop straight into terminal mode
+end, { desc = 'Open Claude in a right-side terminal' })
+
+-- let you type :claude (lowercase) and have it expand to :Claude
+vim.cmd([[
+  cnoreabbrev <expr> claude (getcmdtype() == ':' && getcmdline() ==# 'claude') ? 'Claude' : 'claude'
+]])
