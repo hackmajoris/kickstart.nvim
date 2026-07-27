@@ -1046,3 +1046,8 @@ end, { desc = 'Open Claude in a right-side terminal' })
 vim.cmd([[
   cnoreabbrev <expr> claude (getcmdtype() == ':' && getcmdline() ==# 'claude') ? 'Claude' : 'claude'
 ]])
+
+vim.keymap.set("n", "-", "<cmd>Rex<CR>", { desc = "Return to netrw explorer" })
+vim.keymap.set('n', '<leader>oi', function()
+  vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })
+end, { desc = 'Organize imports' })
