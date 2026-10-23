@@ -42,6 +42,8 @@ External Requirements:
   - If you want to write Golang, you will need `go`
   - etc.
 
+On macOS install them all with `brew bundle --file ~/.config/nvim/Brewfile`.
+
 > [!NOTE]
 > See [Install Recipes](#Install-Recipes) for additional Windows and Linux specific notes
 > and quick install snippets
